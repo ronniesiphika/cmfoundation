@@ -1,2 +1,0 @@
-# cmfoundation
-Construction Management Foundation
