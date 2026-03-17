@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Construction Management Foundation | Professional Registration Support</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --crimson: #8B1A1A;
+  --deep-red: #6B1515;
+  --dark-red: #4A0E0E;
+  --blood: #A02020;
+  --charcoal: #1A1A1A;
+  --dark-grey: #2A2A2A;
+  --mid-grey: #3A3A3A;
+  --steel: #4A4A4A;
+  --silver: #8A8A8A;
+  --light-grey: #C0C0C0;
+  --off-white: #F5F3F0;
+  --warm-white: #FAF8F5;
+  --white: #FFFFFF;
+  --gold: #C9A84C;
+  --gold-light: #E8D48B;
+  --red-glow: rgba(139,26,26,0.12);
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'DM Sans', -apple-system, sans-serif;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); color: var(--charcoal); background: var(--charcoal); overflow-x: hidden; }
+
+/* Noise */
+body::before {
+  content:''; position:fixed; inset:0; pointer-events:none; z-index:9999; opacity:0.02;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ===== NAVIGATION ===== */
+.nav {
+  position: fixed; top:0; left:0; right:0; z-index:1000;
+  background: rgba(26,26,26,0.95); backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(139,26,26,0.2);
+  transition: all 0.3s;
+}
+.nav-inner {
+  max-width:1200px; margin:0 auto; padding:0.8rem 2rem;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.nav-brand {
+  display:flex; flex-direction:column;
+}
+.nav-brand-name {
+  font-family:var(--serif); font-size:1.1rem; color:var(--white); font-weight:700; letter-spacing:0.5px;
+}
+.nav-brand-sub {
+  font-size:0.6rem; color:var(--crimson); text-transform:uppercase; letter-spacing:3px; font-weight:600;
+}
+.nav-links { display:flex; gap:0; align-items:center; }
+.nav-link {
+  padding:0.5rem 1rem; color:var(--silver); font-size:0.8rem; font-weight:500;
+  text-decoration:none; text-transform:uppercase; letter-spacing:1.5px;
+  transition:all 0.3s; cursor:pointer; border:none; background:none;
+}
+.nav-link:hover, .nav-link.active { color:var(--white); }
+.nav-cta-btn {
+  margin-left:1rem; padding:0.55rem 1.5rem; background:var(--crimson); color:var(--white);
+  font-family:var(--sans); font-size:0.75rem; font-weight:600; letter-spacing:1.5px;
+  text-transform:uppercase; border:none; cursor:pointer; transition:all 0.3s; text-decoration:none;
+}
+.nav-cta-btn:hover { background:var(--blood); transform:translateY(-1px); }
+
+/* Mobile menu */
+.nav-toggle { display:none; background:none; border:none; color:var(--white); font-size:1.5rem; cursor:pointer; }
+
+/* ===== PAGE SYSTEM ===== */
+.page { display:none; min-height:100vh; padding-top:60px; }
+.page.active { display:block; }
+
+/* ===== HERO ===== */
+.hero {
+  min-height:100vh; display:flex; flex-direction:column; justify-content:center;
+  position:relative; padding:4rem 2rem;
+  background: linear-gradient(160deg, var(--charcoal) 0%, var(--dark-grey) 40%, var(--dark-red) 100%);
+}
+.hero::before {
+  content:''; position:absolute; bottom:0; left:0; right:0; height:1px;
+  background: linear-gradient(90deg, transparent, var(--crimson), transparent);
+}
+.hero::after {
+  content:''; position:absolute; top:10%; right:5%; width:500px; height:500px;
+  background: radial-gradient(circle, var(--red-glow) 0%, transparent 70%);
+  border-radius:50%; pointer-events:none;
+}
+
+.hero-content { max-width:850px; z-index:5; position:relative; margin-left:8%; }
+
+.hero-foundation {
+  font-size:0.7rem; font-weight:600; letter-spacing:4px; text-transform:uppercase;
+  color:var(--crimson); margin-bottom:0.5rem;
+  border-left:3px solid var(--crimson); padding-left:1rem;
+  animation: fadeInLeft 0.6s ease;
+}
+.hero-org {
+  font-family:var(--serif); font-size:1.6rem; color:var(--gold);
+  margin-bottom:2rem; font-weight:400;
+  animation: fadeInLeft 0.6s ease 0.1s both;
+}
+
+.hero h1 {
+  font-family:var(--serif); font-size:clamp(2.5rem,5.5vw,4rem);
+  color:var(--white); line-height:1.15; margin-bottom:1.5rem;
+  animation: fadeInUp 0.8s ease 0.2s both;
+}
+.hero h1 em { color:var(--gold); font-style:italic; }
+
+.hero-sub {
+  font-size:1.1rem; color:var(--silver); line-height:1.8; max-width:600px;
+  margin-bottom:2.5rem; font-weight:300;
+  animation: fadeInUp 0.8s ease 0.4s both;
+}
+
+.hero-actions {
+  display:flex; gap:1rem; flex-wrap:wrap;
+  animation: fadeInUp 0.8s ease 0.6s both;
+}
+.btn-red {
+  padding:1rem 2.5rem; background:var(--crimson); color:var(--white); border:none;
+  font-family:var(--sans); font-weight:600; font-size:0.9rem; cursor:pointer;
+  transition:all 0.3s; text-decoration:none; letter-spacing:0.5px;
+}
+.btn-red:hover { background:var(--blood); transform:translateY(-2px); box-shadow:0 8px 30px rgba(139,26,26,0.4); }
+.btn-ghost {
+  padding:1rem 2.5rem; background:transparent; border:1.5px solid rgba(255,255,255,0.2);
+  color:var(--white); font-family:var(--sans); font-weight:500; font-size:0.9rem;
+  cursor:pointer; transition:all 0.3s; text-decoration:none;
+}
+.btn-ghost:hover { border-color:var(--white); background:rgba(255,255,255,0.03); }
+
+.hero-stats-bar {
+  display:flex; gap:3rem; margin-top:4rem; padding-top:2rem;
+  border-top:1px solid rgba(255,255,255,0.06);
+  animation: fadeInUp 0.8s ease 0.8s both;
+}
+.hstat-num { font-family:var(--serif); font-size:2rem; color:var(--gold); }
+.hstat-label { font-size:0.7rem; color:var(--silver); text-transform:uppercase; letter-spacing:1.5px; margin-top:0.2rem; }
+
+/* ===== SHARED SECTION STYLES ===== */
+.section { padding:6rem 2rem; }
+.section-charcoal { background:var(--charcoal); }
+.section-dark { background:var(--dark-grey); }
+.section-light { background:var(--off-white); }
+.section-warm { background:var(--warm-white); }
+.section-red { background: linear-gradient(160deg, var(--dark-red) 0%, var(--crimson) 100%); }
+
+.container { max-width:1100px; margin:0 auto; }
+
+.sec-label {
+  font-size:0.7rem; font-weight:600; letter-spacing:3px; text-transform:uppercase;
+  color:var(--crimson); margin-bottom:0.8rem;
+}
+.section-light .sec-label, .section-warm .sec-label { color:var(--crimson); }
+.section-charcoal .sec-label, .section-dark .sec-label { color:var(--gold); }
+.section-red .sec-label { color:var(--gold-light); }
+
+.sec-title {
+  font-family:var(--serif); font-size:clamp(1.8rem,3.5vw,2.8rem);
+  line-height:1.2; margin-bottom:1rem;
+}
+.section-charcoal .sec-title, .section-dark .sec-title, .section-red .sec-title { color:var(--white); }
+.section-light .sec-title, .section-warm .sec-title { color:var(--charcoal); }
+
+.sec-desc {
+  font-size:1rem; line-height:1.7; color:var(--silver); max-width:650px; margin-bottom:3rem; font-weight:300;
+}
+.section-light .sec-desc, .section-warm .sec-desc { color:var(--steel); }
+.section-red .sec-desc { color:rgba(255,255,255,0.7); }
+
+/* ===== CARDS ===== */
+.card-grid { display:grid; gap:1.5rem; }
+.grid-2 { grid-template-columns:repeat(2,1fr); }
+.grid-3 { grid-template-columns:repeat(3,1fr); }
+.grid-4 { grid-template-columns:repeat(4,1fr); }
+.grid-5 { grid-template-columns:repeat(5,1fr); }
+
+.card {
+  background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);
+  padding:2rem; transition:all 0.4s; position:relative;
+}
+.card:hover { border-color:var(--crimson); transform:translateY(-4px); }
+.card-light {
+  background:var(--white); border:none; padding:2rem;
+  box-shadow:0 2px 20px rgba(0,0,0,0.04); transition:all 0.4s;
+}
+.card-light:hover { transform:translateY(-4px); box-shadow:0 12px 40px rgba(0,0,0,0.08); }
+
+.card-accent {
+  position:absolute; top:0; left:0; width:3px; height:100%;
+  background:var(--crimson);
+}
+.card-num {
+  font-family:var(--serif); font-size:2.5rem; color:var(--crimson); opacity:0.25; line-height:1;
+}
+.card h3 { font-size:1rem; font-weight:700; margin:0.6rem 0 0.5rem; }
+.card p, .card-light p { font-size:0.85rem; line-height:1.6; font-weight:300; }
+.section-charcoal .card h3, .section-dark .card h3 { color:var(--white); }
+.section-charcoal .card p, .section-dark .card p { color:var(--silver); }
+.card-light h3 { color:var(--charcoal); font-size:1rem; font-weight:700; margin-bottom:0.5rem; }
+.card-light p { color:var(--steel); }
+
+/* Process cards */
+.proc-card {
+  background:var(--white); padding:2rem 1.5rem; text-align:center;
+  border-bottom:3px solid transparent; transition:all 0.4s;
+  box-shadow:0 2px 15px rgba(0,0,0,0.04);
+}
+.proc-card:hover { border-bottom-color:var(--crimson); transform:translateY(-6px); box-shadow:0 12px 40px rgba(0,0,0,0.08); }
+.proc-num {
+  width:44px; height:44px; border-radius:50%; background:var(--crimson); color:var(--white);
+  font-family:var(--serif); font-size:1.2rem; display:flex; align-items:center;
+  justify-content:center; margin:0 auto 1rem;
+}
+.proc-card h3 { font-size:0.85rem; font-weight:700; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:0.5rem; }
+.proc-card p { font-size:0.78rem; color:var(--steel); line-height:1.5; }
+.proc-time { display:inline-block; margin-top:0.7rem; padding:0.25rem 0.7rem; background:var(--crimson); color:var(--white); font-size:0.65rem; font-weight:600; letter-spacing:0.5px; }
+
+/* Pricing */
+.price-card {
+  background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);
+  padding:2.5rem 2rem; text-align:center; transition:all 0.4s; position:relative;
+}
+.price-card:hover { border-color:var(--crimson); transform:translateY(-4px); }
+.price-card.featured { background:var(--crimson); border-color:var(--crimson); }
+.price-badge { position:absolute; top:-1px; left:50%; transform:translateX(-50%); padding:0.25rem 0.8rem; background:var(--gold); color:var(--charcoal); font-size:0.6rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; }
+.price-name { font-size:0.8rem; font-weight:600; color:var(--gold); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:1rem; }
+.price-amt { font-family:var(--serif); font-size:2.2rem; color:var(--white); margin-bottom:0.2rem; }
+.price-vat { font-size:0.7rem; color:var(--silver); margin-bottom:1.2rem; }
+.price-scope { font-size:0.8rem; color:var(--silver); line-height:1.6; margin-bottom:1.2rem; min-height:60px; }
+.price-items { list-style:none; text-align:left; }
+.price-item { padding:0.35rem 0; font-size:0.78rem; color:var(--silver); border-bottom:1px solid rgba(255,255,255,0.05); }
+.price-item::before { content:'✓'; color:var(--gold); margin-right:0.5rem; font-weight:700; }
+.price-card.featured .price-name { color:var(--gold-light); }
+.price-card.featured .price-amt, .price-card.featured .price-scope, .price-card.featured .price-item { color:var(--white); }
+.price-card.featured .price-vat { color:rgba(255,255,255,0.6); }
+.price-card.featured .price-item { border-bottom-color:rgba(255,255,255,0.15); }
+
+/* Benefit cards */
+.ben-card {
+  padding:1.8rem; background:var(--white); border-left:3px solid var(--crimson);
+  transition:all 0.3s;
+}
+.ben-card:hover { transform:translateX(6px); box-shadow:0 4px 20px rgba(0,0,0,0.06); }
+.ben-icon { font-size:1.6rem; margin-bottom:0.6rem; }
+.ben-card h3 { font-size:0.95rem; font-weight:700; color:var(--charcoal); margin-bottom:0.4rem; }
+.ben-card p { font-size:0.82rem; color:var(--steel); line-height:1.5; }
+
+/* Output preview cards */
+.output-card {
+  background:var(--white); overflow:hidden; box-shadow:0 4px 25px rgba(0,0,0,0.06);
+  transition:all 0.4s;
+}
+.output-card:hover { transform:translateY(-6px); box-shadow:0 16px 50px rgba(0,0,0,0.1); }
+.output-preview {
+  height:200px; background:var(--dark-grey); position:relative; overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+}
+.output-preview-content {
+  width:85%; height:80%; background:var(--white); border-radius:2px; padding:0.8rem;
+  font-size:0.5rem; color:var(--steel); overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,0.2);
+}
+.mock-header { height:8px; background:var(--crimson); margin-bottom:6px; border-radius:1px; }
+.mock-title { height:6px; width:60%; background:var(--charcoal); margin-bottom:4px; border-radius:1px; }
+.mock-line { height:3px; background:var(--light-grey); margin-bottom:3px; border-radius:1px; }
+.mock-line.short { width:70%; }
+.mock-line.medium { width:85%; }
+.mock-table { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; margin-top:6px; }
+.mock-cell { height:8px; background:var(--off-white); border-radius:1px; }
+.mock-cell.header { background:var(--crimson); }
+.mock-rag { display:flex; gap:3px; margin-top:6px; }
+.mock-rag-item { flex:1; height:10px; border-radius:1px; }
+.mock-rag-r { background:#E74C3C; }
+.mock-rag-a { background:#F39C12; }
+.mock-rag-g { background:#27AE60; }
+.mock-chart { display:flex; align-items:flex-end; gap:3px; margin-top:8px; height:40px; }
+.mock-bar { flex:1; background:var(--crimson); border-radius:1px 1px 0 0; }
+
+.output-info { padding:1.5rem; }
+.output-info h3 { font-size:1rem; font-weight:700; color:var(--charcoal); margin-bottom:0.4rem; }
+.output-info p { font-size:0.82rem; color:var(--steel); line-height:1.5; }
+.output-tag { display:inline-block; padding:0.2rem 0.6rem; background:var(--off-white); color:var(--crimson); font-size:0.65rem; font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-top:0.6rem; }
+
+/* Team cards */
+.team-card { text-align:center; padding:2rem; }
+.team-avatar {
+  width:80px; height:80px; border-radius:50%; background:var(--mid-grey);
+  margin:0 auto 1rem; display:flex; align-items:center; justify-content:center;
+  font-family:var(--serif); font-size:1.5rem; color:var(--gold); border:2px solid var(--crimson);
+}
+.team-card h3 { color:var(--white); font-size:1rem; margin-bottom:0.2rem; }
+.team-card .team-role { color:var(--gold); font-size:0.8rem; font-weight:500; margin-bottom:0.6rem; }
+.team-card p { color:var(--silver); font-size:0.8rem; line-height:1.5; }
+
+/* Resource cards */
+.res-card {
+  display:flex; gap:1.5rem; padding:2rem; background:var(--white);
+  box-shadow:0 2px 15px rgba(0,0,0,0.04); transition:all 0.3s; align-items:flex-start;
+}
+.res-card:hover { transform:translateX(6px); box-shadow:0 8px 30px rgba(0,0,0,0.08); }
+.res-icon {
+  width:50px; height:50px; min-width:50px; background:var(--crimson); display:flex;
+  align-items:center; justify-content:center; font-size:1.3rem; color:var(--white);
+}
+.res-card h3 { font-size:0.95rem; font-weight:700; color:var(--charcoal); margin-bottom:0.3rem; }
+.res-card p { font-size:0.82rem; color:var(--steel); line-height:1.5; }
+.res-tag { font-size:0.65rem; color:var(--crimson); font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-top:0.4rem; display:inline-block; }
+
+/* ===== FORM ===== */
+.form-section {
+  background: linear-gradient(160deg, var(--dark-grey) 0%, var(--dark-red) 100%);
+  padding:6rem 2rem;
+}
+.form-wrapper { max-width:700px; margin:0 auto; }
+.form-wrapper .sec-label, .form-wrapper .sec-title { text-align:center; }
+.form-wrapper .sec-title { color:var(--white); }
+.form-wrapper .sec-desc { text-align:center; margin:0 auto 3rem; }
+
+.form-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+.form-group { display:flex; flex-direction:column; }
+.form-group.full { grid-column:1/-1; }
+.form-group label { font-size:0.75rem; font-weight:600; color:var(--gold); text-transform:uppercase; letter-spacing:1px; margin-bottom:0.4rem; }
+.form-group input, .form-group select, .form-group textarea {
+  padding:0.85rem 1rem; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);
+  color:var(--white); font-family:var(--sans); font-size:0.9rem; transition:all 0.3s; outline:none;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  border-color:var(--crimson); background:rgba(255,255,255,0.08); box-shadow:0 0 0 3px var(--red-glow);
+}
+.form-group select option { background:var(--charcoal); color:var(--white); }
+.form-group textarea { resize:vertical; min-height:90px; }
+.form-group input::placeholder, .form-group textarea::placeholder { color:rgba(255,255,255,0.25); }
+.form-submit { grid-column:1/-1; margin-top:0.5rem; }
+.form-submit button {
+  width:100%; padding:1rem; background:var(--crimson); color:var(--white); border:none;
+  font-family:var(--sans); font-weight:700; font-size:0.95rem; letter-spacing:1px;
+  text-transform:uppercase; cursor:pointer; transition:all 0.3s;
+}
+.form-submit button:hover { background:var(--blood); transform:translateY(-2px); box-shadow:0 8px 30px rgba(139,26,26,0.4); }
+.form-note { text-align:center; color:var(--silver); font-size:0.7rem; margin-top:0.8rem; }
+.form-success { display:none; text-align:center; padding:3rem; animation:fadeInUp 0.5s ease; }
+.form-success h3 { font-family:var(--serif); font-size:1.8rem; color:var(--gold); margin-bottom:1rem; }
+.form-success p { color:var(--silver); font-size:0.95rem; line-height:1.7; }
+
+/* ===== FOOTER ===== */
+footer {
+  background:var(--charcoal); border-top:1px solid rgba(139,26,26,0.2); padding:3rem 2rem;
+}
+.footer-inner {
+  max-width:1100px; margin:0 auto; display:flex; justify-content:space-between;
+  align-items:center; flex-wrap:wrap; gap:1.5rem;
+}
+.footer-brand { color:var(--silver); font-size:0.82rem; }
+.footer-brand strong { color:var(--gold); }
+.footer-right { text-align:right; color:var(--silver); font-size:0.75rem; line-height:1.8; }
+.footer-right strong { color:var(--light-grey); }
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeInLeft { from{opacity:0;transform:translateX(-20px)} to{opacity:1;transform:translateX(0)} }
+.reveal { opacity:0; transform:translateY(40px); transition:all 0.8s cubic-bezier(0.25,0.46,0.45,0.94); }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1024px) {
+  .grid-5 { grid-template-columns:repeat(3,1fr); }
+  .grid-4 { grid-template-columns:repeat(2,1fr); }
+}
+@media(max-width:768px) {
+  .nav-links { display:none; }
+  .nav-toggle { display:block; }
+  .nav-links.open { display:flex; flex-direction:column; position:absolute; top:100%; left:0; right:0; background:var(--charcoal); padding:1rem; border-top:1px solid rgba(139,26,26,0.2); }
+  .nav-cta-btn { margin-left:0; margin-top:0.5rem; }
+  .grid-2, .grid-3, .grid-4, .grid-5 { grid-template-columns:1fr; }
+  .hero-content { margin-left:0; }
+  .hero-stats-bar { flex-direction:column; gap:1.5rem; }
+  .form-grid { grid-template-columns:1fr; }
+  .res-card { flex-direction:column; }
+  .footer-inner { flex-direction:column; text-align:center; }
+  .footer-right { text-align:center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <span class="nav-brand-name">Construction Management Foundation</span>
+      <span class="nav-brand-sub">Non-Profit Company</span>
+    </div>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    <div class="nav-links">
+      <button class="nav-link active" onclick="showPage('home',this)">Home</button>
+      <button class="nav-link" onclick="showPage('about',this)">About Us</button>
+      <button class="nav-link" onclick="showPage('programme',this)">Programme</button>
+      <button class="nav-link" onclick="showPage('process',this)">How It Works</button>
+      <button class="nav-link" onclick="showPage('outputs',this)">Outputs</button>
+      <button class="nav-link" onclick="showPage('pricing',this)">Pricing</button>
+      <button class="nav-link" onclick="showPage('employers',this)">Employers</button>
+      <button class="nav-link" onclick="showPage('resources',this)">Resources</button>
+      <a href="#" class="nav-cta-btn" onclick="showPage('register',null);return false;">Register Interest</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================================================ -->
+<!-- PAGE 1: HOME -->
+<!-- ============================================================ -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-foundation">Non-Profit Company</div>
+      <div class="hero-org">Construction Management Foundation</div>
+      <h1>Advancing <em>Professional Registration</em> Across Africa</h1>
+      <p class="hero-sub">We help construction and project management professionals achieve Pr. CPM and Pr. CM registration with SACPCMP. From initial assessment to interview coaching — dedicated, affordable support for the designation you've earned.</p>
+      <div class="hero-actions">
+        <a href="#" class="btn-red" onclick="showPage('register',null);return false;">Register Your Interest</a>
+        <a href="#" class="btn-ghost" onclick="showPage('process',null);return false;">See How It Works</a>
+      </div>
+      <div class="hero-stats-bar">
+        <div><div class="hstat-num">R540bn</div><div class="hstat-label">SA Infrastructure Pipeline</div></div>
+        <div><div class="hstat-num">5,000+</div><div class="hstat-label">Unregistered Professionals</div></div>
+        <div><div class="hstat-num">12 wks</div><div class="hstat-label">Programme Duration</div></div>
+        <div><div class="hstat-num">75%+</div><div class="hstat-label">Target Success Rate</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick challenge -->
+  <section class="section section-charcoal">
+    <div class="container reveal">
+      <div class="sec-label">The Challenge</div>
+      <h2 class="sec-title">Registration is Mandatory. The Process is Complex.</h2>
+      <p class="sec-desc">Act 48 of 2000 requires all persons practising in construction management to be registered. The penalty is a fine equal to double the remuneration received.</p>
+      <div class="card-grid grid-3">
+        <div class="card"><div class="card-accent"></div><div class="card-num">01</div><h3>Terminology Gap</h3><p>SACPCMP requires specific language that differs from your company titles. Your experience is valid — but it must be translated into SACPCMP terminology.</p></div>
+        <div class="card"><div class="card-accent"></div><div class="card-num">02</div><h3>Documentation Burden</h3><p>Prescribed CV, project profiles, two 1,500-word reports under 9 PMBOK knowledge areas, CPD records — significant and format-specific requirements.</p></div>
+        <div class="card"><div class="card-accent"></div><div class="card-num">03</div><h3>Route Confusion</h3><p>Five registration routes, NQF levels, credit counts, accreditation — most candidates are unsure which path applies to them.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick process -->
+  <section class="section section-light">
+    <div class="container reveal">
+      <div class="sec-label">Our Solution</div>
+      <h2 class="sec-title">Five Phases. One Clear Pathway.</h2>
+      <p class="sec-desc">We manage your registration like a construction project — structured milestones, clear deliverables, relentless quality assurance.</p>
+      <div class="card-grid grid-5">
+        <div class="proc-card"><div class="proc-num">1</div><h3>Assessment</h3><p>Pre-screening, eligibility, route recommendation</p><span class="proc-time">1–2 Weeks</span></div>
+        <div class="proc-card"><div class="proc-num">2</div><h3>Gap Analysis</h3><p>6-tab workbook, RAG scoring, action plan</p><span class="proc-time">1–2 Weeks</span></div>
+        <div class="proc-card"><div class="proc-num">3</div><h3>Documentation</h3><p>CV, A1, A2 reports, CPD — SACPCMP-ready</p><span class="proc-time">4–6 Weeks</span></div>
+        <div class="proc-card"><div class="proc-num">4</div><h3>Submission</h3><p>Portal support, uploads, SACPCMP liaison</p><span class="proc-time">2–4 Weeks</span></div>
+        <div class="proc-card"><div class="proc-num">5</div><h3>Interview Prep</h3><p>Knowledge areas, legislation, mock interviews</p><span class="proc-time">3–4 Weeks</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section section-red">
+    <div class="container" style="text-align:center;">
+      <h2 class="sec-title" style="margin-bottom:1.5rem;">Ready to Get Registered?</h2>
+      <p class="sec-desc" style="margin:0 auto 2rem; max-width:500px; text-align:center;">Your professional registration journey starts with a single conversation. Register your interest and we'll contact you within 48 hours.</p>
+      <a href="#" class="btn-red" style="background:var(--gold);color:var(--charcoal);" onclick="showPage('register',null);return false;">Register Your Interest</a>
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 2: ABOUT US -->
+<!-- ============================================================ -->
+<div class="page" id="page-about">
+  <section class="section section-charcoal" style="padding-top:5rem;">
+    <div class="container reveal">
+      <div class="sec-label">About Us</div>
+      <h2 class="sec-title">The Construction Management Foundation</h2>
+      <p class="sec-desc">A non-profit company dedicated to advancing construction management professionalism across Africa through accessible registration support, skills development, and industry transformation.</p>
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="container reveal">
+      <div class="card-grid grid-2" style="gap:3rem; align-items:start;">
+        <div>
+          <div class="sec-label">Our Mission</div>
+          <h2 class="sec-title" style="font-size:2rem;">To professionalise construction management in Africa by removing barriers to SACPCMP registration and building a pipeline of registered professionals who deliver safer, higher-quality construction outcomes.</h2>
+        </div>
+        <div>
+          <h3 style="font-weight:700; margin-bottom:1rem; color:var(--crimson);">Our Vision</h3>
+          <p style="line-height:1.8; color:var(--steel); margin-bottom:2rem;">A construction industry where every practising construction project manager and construction manager is professionally registered, competent, and committed to ethical practice — regardless of their socioeconomic background.</p>
+          <h3 style="font-weight:700; margin-bottom:1rem; color:var(--crimson);">Our Values</h3>
+          <div style="display:flex;flex-direction:column;gap:0.6rem;">
+            <p style="color:var(--steel);"><strong style="color:var(--charcoal);">Accessibility</strong> — Professional registration should not be a privilege of the few. We make the process navigable for all.</p>
+            <p style="color:var(--steel);"><strong style="color:var(--charcoal);">Excellence</strong> — We hold ourselves and our candidates to the highest professional standards.</p>
+            <p style="color:var(--steel);"><strong style="color:var(--charcoal);">Transformation</strong> — We actively support historically disadvantaged professionals in achieving registration.</p>
+            <p style="color:var(--steel);"><strong style="color:var(--charcoal);">Integrity</strong> — We operate transparently and ethically in everything we do.</p>
+            <p style="color:var(--steel);"><strong style="color:var(--charcoal);">Impact</strong> — We measure success by registrations achieved, not services sold.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container reveal">
+      <div class="sec-label">Governance</div>
+      <h2 class="sec-title">Our Structure</h2>
+      <p class="sec-desc">As a Non-Profit Company (NPC), the Construction Management Foundation operates under King IV governance principles with an independent board of directors drawn from the construction management profession.</p>
+      <div class="card-grid grid-3">
+        <div class="card"><h3>NPC Registration</h3><p>Registered as a Non-Profit Company under the Companies Act, 2008. All surplus funds are reinvested into programme delivery and candidate support.</p></div>
+        <div class="card"><h3>King IV Governance</h3><p>Governed by an independent board applying King IV principles of ethical leadership, stakeholder inclusivity, and integrated thinking.</p></div>
+        <div class="card"><h3>B-BBEE Commitment</h3><p>Level 1 B-BBEE contributor committed to transformation in the construction management profession and supporting SMME development.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-charcoal">
+    <div class="container reveal">
+      <div class="sec-label">Our Impact</div>
+      <h2 class="sec-title">What Drives Us</h2>
+      <div class="card-grid grid-4">
+        <div style="text-align:center;padding:1.5rem;"><div class="hstat-num" style="font-size:2.5rem;">50,000+</div><div class="hstat-label">Industry Employees in SA</div></div>
+        <div style="text-align:center;padding:1.5rem;"><div class="hstat-num" style="font-size:2.5rem;">5,000+</div><div class="hstat-label">Unregistered Practitioners</div></div>
+        <div style="text-align:center;padding:1.5rem;"><div class="hstat-num" style="font-size:2.5rem;">R540bn</div><div class="hstat-label">Infrastructure Pipeline</div></div>
+        <div style="text-align:center;padding:1.5rem;"><div class="hstat-num" style="font-size:2.5rem;">75%+</div><div class="hstat-label">Target Success Rate</div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 3: PROGRAMME DETAIL -->
+<!-- ============================================================ -->
+<div class="page" id="page-programme">
+  <section class="section section-charcoal" style="padding-top:5rem;">
+    <div class="container reveal">
+      <div class="sec-label">The Programme</div>
+      <h2 class="sec-title">SACPCMP Registration Support Programme</h2>
+      <p class="sec-desc">End-to-end support for built environment professionals pursuing Pr. CPM or Pr. CM registration. We don't just advise — we prepare your actual documents, coach you through the interview, and monitor your application until you're registered.</p>
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="container reveal">
+      <div class="sec-label">Who Is This For</div>
+      <h2 class="sec-title">Three Target Groups</h2>
+      <div class="card-grid grid-3" style="margin-top:2rem;">
+        <div class="card-light" style="border-top:3px solid var(--crimson);">
+          <h3>Existing Candidates</h3>
+          <p style="margin-bottom:0.8rem;">Already registered as C.CM or C.CPM but need support upgrading to professional status. Documentation, terminology, and interview prep.</p>
+          <span style="font-size:0.75rem;color:var(--crimson);font-weight:600;">EST. 2,000+ NATIONALLY</span>
+        </div>
+        <div class="card-light" style="border-top:3px solid var(--crimson);">
+          <h3>Unregistered Professionals</h3>
+          <p style="margin-bottom:0.8rem;">Site agents, contracts managers, project coordinators with years of experience but no SACPCMP registration. We bridge the gap.</p>
+          <span style="font-size:0.75rem;color:var(--crimson);font-weight:600;">EST. 5,000+ NATIONALLY</span>
+        </div>
+        <div class="card-light" style="border-top:3px solid var(--crimson);">
+          <h3>Employers & Organisations</h3>
+          <p style="margin-bottom:0.8rem;">Contractors, consultants, developers, and government departments registering staff for compliance and B-BBEE.</p>
+          <span style="font-size:0.75rem;color:var(--crimson);font-weight:600;">CORPORATE PACKAGES AVAILABLE</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container reveal">
+      <div class="sec-label">What We Deliver</div>
+      <h2 class="sec-title">Complete Deliverable Suite</h2>
+      <p class="sec-desc">Every candidate receives production-ready, SACPCMP-compliant documents — not templates or outlines.</p>
+      <div class="card-grid grid-2">
+        <div class="card"><div class="card-accent"></div><h3>Gap Analysis Workbook</h3><p>6-tab Excel: Executive Summary with RAG scoring, Qualification Analysis, Experience Mapping, CV Gap Analysis, Action Plan, Terminology Mapping.</p></div>
+        <div class="card"><div class="card-accent"></div><h3>SACPCMP-Ready CV</h3><p>Complete rewrite in prescribed format with organogram, project summary table, CPD record, employment history, and SACPCMP terminology throughout.</p></div>
+        <div class="card"><div class="card-accent"></div><h3>Annexure A1 Project Profiles</h3><p>Minimum 2 projects with all 12 required fields, client contacts, participating organisations, and progress photographs.</p></div>
+        <div class="card"><div class="card-accent"></div><h3>Annexure A2 Reports (x2)</h3><p>Successes and Challenges reports (~1,500 words each) structured under 9 PMBOK knowledge areas demonstrating CPM/CM competence.</p></div>
+        <div class="card"><div class="card-accent"></div><h3>Registration Schedule</h3><p>Gantt chart with milestones, fortnightly meeting tracker, and document submission tracker for ongoing monitoring.</p></div>
+        <div class="card"><div class="card-accent"></div><h3>Interview Preparation Pack</h3><p>200-question bank, legislation reference guide, contracts study notes, and recorded mock interview session.</p></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 4: HOW IT WORKS (DETAILED) -->
+<!-- ============================================================ -->
+<div class="page" id="page-process">
+  <section class="section section-charcoal" style="padding-top:5rem;">
+    <div class="container reveal">
+      <div class="sec-label">How It Works</div>
+      <h2 class="sec-title">The 5-Phase Registration Journey</h2>
+      <p class="sec-desc">Each phase has defined deliverables, timelines, and quality checkpoints. Total programme duration: 12–16 weeks from engagement to interview readiness.</p>
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="container">
+      <div style="display:flex;flex-direction:column;gap:3rem;">
+        <div class="reveal" style="display:grid;grid-template-columns:100px 1fr;gap:2rem;align-items:start;">
+          <div style="text-align:center;"><div class="proc-num" style="margin:0 auto;width:60px;height:60px;font-size:1.5rem;">1</div><span class="proc-time" style="margin-top:0.5rem;">1–2 wks</span></div>
+          <div><h3 style="font-size:1.3rem;color:var(--charcoal);margin-bottom:0.5rem;">Initial Assessment & Pre-Screening</h3><p style="color:var(--steel);line-height:1.7;margin-bottom:1rem;">We start with a thorough assessment of your qualifications, experience, and career profile against SACPCMP requirements.</p><p style="color:var(--steel);font-size:0.85rem;"><strong>Activities:</strong> Pre-screening form completion, CV review, qualification verification, registration route analysis (Routes 1–5), Pr. CPM vs Pr. CM recommendation, programme proposal and fee quotation.</p><p style="color:var(--crimson);font-size:0.85rem;font-weight:600;margin-top:0.5rem;">Deliverables: Eligibility assessment, route recommendation, programme proposal.</p></div>
+        </div>
+        <div class="reveal" style="display:grid;grid-template-columns:100px 1fr;gap:2rem;align-items:start;">
+          <div style="text-align:center;"><div class="proc-num" style="margin:0 auto;width:60px;height:60px;font-size:1.5rem;">2</div><span class="proc-time" style="margin-top:0.5rem;">1–2 wks</span></div>
+          <div><h3 style="font-size:1.3rem;color:var(--charcoal);margin-bottom:0.5rem;">Comprehensive Gap Analysis</h3><p style="color:var(--steel);line-height:1.7;margin-bottom:1rem;">A deep-dive assessment producing a multi-tab workbook that maps your entire profile against every SACPCMP requirement.</p><p style="color:var(--steel);font-size:0.85rem;"><strong>Activities:</strong> CV assessment against 11+ SACPCMP sections, qualification mapping against 5 routes, experience mapping against 6 project stages and 9 PMBOK knowledge areas, RAG-rated readiness scoring, terminology gap identification, personalised action plan with milestones.</p><p style="color:var(--crimson);font-size:0.85rem;font-weight:600;margin-top:0.5rem;">Deliverables: 6-tab gap analysis Excel workbook, formal consultation meeting.</p></div>
+        </div>
+        <div class="reveal" style="display:grid;grid-template-columns:100px 1fr;gap:2rem;align-items:start;">
+          <div style="text-align:center;"><div class="proc-num" style="margin:0 auto;width:60px;height:60px;font-size:1.5rem;">3</div><span class="proc-time" style="margin-top:0.5rem;">4–6 wks</span></div>
+          <div><h3 style="font-size:1.3rem;color:var(--charcoal);margin-bottom:0.5rem;">Documentation Preparation</h3><p style="color:var(--steel);line-height:1.7;margin-bottom:1rem;">The most intensive phase. We prepare your complete application documentation to SACPCMP standards — not templates, but your actual finished documents.</p><p style="color:var(--steel);font-size:0.85rem;"><strong>Activities:</strong> CV rewrite in SACPCMP prescribed format, organogram creation, Annexure A1 project profiles (min 2), Annexure A2 Successes report (~1,500 words), Annexure A2 Challenges report (~1,500 words), CPD record compilation (Categories A/B/C), cover letter, document consistency review, terminology alignment check.</p><p style="color:var(--crimson);font-size:0.85rem;font-weight:600;margin-top:0.5rem;">Deliverables: CV, A1 profiles, A2 reports (x2), CPD record, cover letter, consistency verification.</p></div>
+        </div>
+        <div class="reveal" style="display:grid;grid-template-columns:100px 1fr;gap:2rem;align-items:start;">
+          <div style="text-align:center;"><div class="proc-num" style="margin:0 auto;width:60px;height:60px;font-size:1.5rem;">4</div><span class="proc-time" style="margin-top:0.5rem;">2–4 wks</span></div>
+          <div><h3 style="font-size:1.3rem;color:var(--charcoal);margin-bottom:0.5rem;">Application Submission & Monitoring</h3><p style="color:var(--steel);line-height:1.7;margin-bottom:1rem;">We guide you through the SACPCMP portal, support document uploads, and then actively monitor your application through each assessment phase.</p><p style="color:var(--steel);font-size:0.85rem;"><strong>Activities:</strong> Portal guidance, final document review, upload support, application confirmation, fortnightly progress reviews, SACPCMP liaison, response preparation for additional information requests.</p><p style="color:var(--crimson);font-size:0.85rem;font-weight:600;margin-top:0.5rem;">Deliverables: Submission confirmation, Gantt schedule, meeting tracker, document tracker.</p></div>
+        </div>
+        <div class="reveal" style="display:grid;grid-template-columns:100px 1fr;gap:2rem;align-items:start;">
+          <div style="text-align:center;"><div class="proc-num" style="margin:0 auto;width:60px;height:60px;font-size:1.5rem;">5</div><span class="proc-time" style="margin-top:0.5rem;">3–4 wks</span></div>
+          <div><h3 style="font-size:1.3rem;color:var(--charcoal);margin-bottom:0.5rem;">Interview Preparation & Post-Registration</h3><p style="color:var(--steel);line-height:1.7;margin-bottom:1rem;">Structured preparation for the SACPCMP professional interview — the final hurdle. We prepare you to demonstrate competence with confidence.</p><p style="color:var(--steel);font-size:0.85rem;"><strong>Activities:</strong> 9 knowledge area coaching with project-specific examples, SA legislation review (OHS Act, Construction Regs, contracts), SACPCMP IDOW study, 200-question preparation bank, mock interview session, post-registration CPD planning.</p><p style="color:var(--crimson);font-size:0.85rem;font-weight:600;margin-top:0.5rem;">Deliverables: Interview prep guide, mock interview recording, legislation notes, CPD plan, completion certificate.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 5: OUTPUTS (SAMPLE PREVIEWS) -->
+<!-- ============================================================ -->
+<div class="page" id="page-outputs">
+  <section class="section section-charcoal" style="padding-top:5rem;">
+    <div class="container reveal">
+      <div class="sec-label">Sample Outputs</div>
+      <h2 class="sec-title">See What We Deliver</h2>
+      <p class="sec-desc">Every candidate receives professionally branded, production-ready documents. Here's a preview of the key deliverables you'll receive as part of the programme.</p>
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="container reveal">
+      <div class="card-grid grid-3">
+        <!-- Gap Analysis -->
+        <div class="output-card">
+          <div class="output-preview">
+            <div class="output-preview-content">
+              <div class="mock-header"></div>
+              <div class="mock-title"></div>
+              <div class="mock-line"></div><div class="mock-line short"></div>
+              <div class="mock-rag"><div class="mock-rag-item mock-rag-g"></div><div class="mock-rag-item mock-rag-a"></div><div class="mock-rag-item mock-rag-r"></div><div class="mock-rag-item mock-rag-r"></div><div class="mock-rag-item mock-rag-a"></div></div>
+              <div class="mock-table"><div class="mock-cell header"></div><div class="mock-cell header"></div><div class="mock-cell header"></div><div class="mock-cell header"></div><div class="mock-cell"></div><div class="mock-cell"></div><div class="mock-cell"></div><div class="mock-cell"></div><div class="mock-cell"></div><div class="mock-cell"></div><div class="mock-cell"></div><div class="mock-cell"></div></div>
+              <div class="mock-chart"><div class="mock-bar" style="height:60%"></div><div class="mock-bar" style="height:85%"></div><div class="mock-bar" style="height:40%"></div><div class="mock-bar" style="height:20%"></div><div class="mock-bar" style="height:70%"></div></div>
+            </div>
+          </div>
+          <div class="output-info">
+            <h3>Gap Analysis Workbook</h3>
+            <p>6-tab Excel with RAG-rated Executive Summary, Qualification Analysis, Experience Mapping against 9 knowledge areas, CV Gap Analysis, Action Plan, and Terminology Mapping.</p>
+            <span class="output-tag">Excel — 6 Tabs</span>
+          </div>
+        </div>
+
+        <!-- CV -->
+        <div class="output-card">
+          <div class="output-preview">
+            <div class="output-preview-content">
+              <div class="mock-header"></div>
+              <div class="mock-title" style="width:50%"></div>
+              <div class="mock-line"></div><div class="mock-line medium"></div><div class="mock-line short"></div>
+              <div style="height:4px"></div>
+              <div class="mock-title" style="width:40%;background:var(--crimson);height:4px;"></div>
+              <div class="mock-table" style="grid-template-columns:1fr 2fr;"><div class="mock-cell" style="background:var(--off-white)"></div><div class="mock-cell"></div><div class="mock-cell" style="background:var(--off-white)"></div><div class="mock-cell"></div><div class="mock-cell" style="background:var(--off-white)"></div><div class="mock-cell"></div><div class="mock-cell" style="background:var(--off-white)"></div><div class="mock-cell"></div></div>
+              <div style="height:6px"></div>
+              <div class="mock-title" style="width:40%;background:var(--crimson);height:4px;"></div>
+              <div class="mock-line"></div><div class="mock-line medium"></div>
+            </div>
+          </div>
+          <div class="output-info">
+            <h3>SACPCMP-Ready CV</h3>
+            <p>Complete rewrite in prescribed format with all 11+ sections: personal details, qualifications table, registrations, employment history, project summary, organogram, CPD record.</p>
+            <span class="output-tag">Word — 8–12 Pages</span>
+          </div>
+        </div>
+
+        <!-- A2 Report -->
+        <div class="output-card">
+          <div class="output-preview">
+            <div class="output-preview-content">
+              <div class="mock-header"></div>
+              <div class="mock-title" style="width:70%"></div>
+              <div style="height:3px"></div>
+              <div class="mock-title" style="width:55%;background:var(--crimson);height:4px;"></div>
+              <div class="mock-line"></div><div class="mock-line medium"></div><div class="mock-line"></div><div class="mock-line short"></div>
+              <div style="height:4px"></div>
+              <div class="mock-title" style="width:55%;background:var(--crimson);height:4px;"></div>
+              <div class="mock-line"></div><div class="mock-line"></div><div class="mock-line medium"></div>
+              <div style="height:4px"></div>
+              <div class="mock-title" style="width:55%;background:var(--crimson);height:4px;"></div>
+              <div class="mock-line"></div><div class="mock-line short"></div>
+            </div>
+          </div>
+          <div class="output-info">
+            <h3>Annexure A2 Project Reports</h3>
+            <p>Two reports (~1,500 words each) — Successes and Challenges — structured under the 9 PMBOK knowledge areas with project-specific examples and SACPCMP terminology.</p>
+            <span class="output-tag">Word — ~1,500 Words Each</span>
+          </div>
+        </div>
+
+        <!-- Schedule -->
+        <div class="output-card">
+          <div class="output-preview">
+            <div class="output-preview-content">
+              <div class="mock-header"></div>
+              <div class="mock-title" style="width:65%"></div>
+              <div style="display:flex;gap:2px;margin-top:8px;">
+                <div style="flex:2;"><div class="mock-cell header" style="height:6px;margin-bottom:2px;"></div><div class="mock-cell" style="height:4px;margin-bottom:2px;"></div><div class="mock-cell" style="height:4px;margin-bottom:2px;"></div><div class="mock-cell" style="height:4px;margin-bottom:2px;"></div><div class="mock-cell" style="height:4px;margin-bottom:2px;"></div></div>
+                <div style="flex:3;display:flex;flex-direction:column;gap:2px;"><div style="height:6px;background:var(--crimson);width:30%;border-radius:1px;"></div><div style="height:4px;background:#E67E22;width:50%;margin-left:10%;border-radius:1px;"></div><div style="height:4px;background:#27AE60;width:40%;margin-left:30%;border-radius:1px;"></div><div style="height:4px;background:#8E44AD;width:25%;margin-left:55%;border-radius:1px;"></div><div style="height:4px;background:#E74C3C;width:20%;margin-left:70%;border-radius:1px;"></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="output-info">
+            <h3>Registration Schedule</h3>
+            <p>Gantt-style timeline with 27+ action items across 5 phases, fortnightly meeting tracker, and document submission tracker with status monitoring.</p>
+            <span class="output-tag">Excel — 3 Tabs</span>
+          </div>
+        </div>
+
+        <!-- Question Bank -->
+        <div class="output-card">
+          <div class="output-preview">
+            <div class="output-preview-content">
+              <div class="mock-header"></div>
+              <div class="mock-title" style="width:75%"></div>
+              <div class="mock-table" style="grid-template-columns:0.5fr 1.5fr 0.5fr 0.5fr;gap:1px;margin-top:4px;">
+                <div class="mock-cell header" style="height:5px;"></div><div class="mock-cell header" style="height:5px;"></div><div class="mock-cell header" style="height:5px;"></div><div class="mock-cell header" style="height:5px;"></div>
+                <div class="mock-cell" style="height:4px;"></div><div class="mock-cell" style="height:4px;"></div><div class="mock-cell" style="height:4px;background:#D5F5E3;"></div><div class="mock-cell" style="height:4px;"></div>
+                <div class="mock-cell" style="height:4px;"></div><div class="mock-cell" style="height:4px;"></div><div class="mock-cell" style="height:4px;background:#FEF9E7;"></div><div class="mock-cell" style="height:4px;"></div>
+                <div class="mock-cell" style="height:4px;"></div><div class="mock-cell" style="height:4px;"></div><div class="mock-cell" style="height:4px;background:#FDEDEC;"></div><div class="mock-cell" style="height:4px;"></div>
+                <div class="mock-cell" style="height:4px;"></div><div class="mock-cell" style="height:4px;"></div><div class="mock-cell" style="height:4px;background:#D5F5E3;"></div><div class="mock-cell" style="height:4px;"></div>
+                <div class="mock-cell" style="height:4px;"></div><div class="mock-cell" style="height:4px;"></div><div class="mock-cell" style="height:4px;background:#FEF9E7;"></div><div class="mock-cell" style="height:4px;"></div>
+              </div>
+            </div>
+          </div>
+          <div class="output-info">
+            <h3>200-Question Interview Bank</h3>
+            <p>Two workbooks: 100 core/intermediate/advanced questions + 100 complex scenario-based questions testing high-order thinking across all knowledge areas.</p>
+            <span class="output-tag">Excel — 200 Questions</span>
+          </div>
+        </div>
+
+        <!-- Guidebook -->
+        <div class="output-card">
+          <div class="output-preview">
+            <div class="output-preview-content">
+              <div class="mock-header"></div>
+              <div style="text-align:center;margin:8px 0 4px;"><div class="mock-title" style="width:50%;margin:0 auto;height:5px;"></div></div>
+              <div class="mock-line" style="width:60%;margin:0 auto;"></div>
+              <div style="height:6px"></div>
+              <div class="mock-title" style="width:45%;background:var(--crimson);height:3px;"></div>
+              <div class="mock-line"></div><div class="mock-line medium"></div><div class="mock-line short"></div>
+              <div style="height:4px"></div>
+              <div class="mock-title" style="width:45%;background:var(--crimson);height:3px;"></div>
+              <div class="mock-line"></div><div class="mock-line"></div>
+              <div style="height:3px;background:#D5F5E3;margin-top:4px;border-radius:1px;padding:1px;"></div>
+            </div>
+          </div>
+          <div class="output-info">
+            <h3>Registration Route Guide</h3>
+            <p>Comprehensive 16-chapter guidebook covering NQF framework, 5 routes, decision flowchart, contracts reference, legislation, self-assessment worksheets, and glossary.</p>
+            <span class="output-tag">Word — 50+ Pages</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 6: PRICING -->
+<!-- ============================================================ -->
+<div class="page" id="page-pricing">
+  <section class="section section-charcoal" style="padding-top:5rem;">
+    <div class="container reveal">
+      <div class="sec-label">Investment</div>
+      <h2 class="sec-title">Transparent Pricing. Real Results.</h2>
+      <p class="sec-desc">All fees inclusive of VAT. As a non-profit, our pricing is set to cover programme delivery costs — not maximise profit. Corporate bulk discounts available.</p>
+      <div class="card-grid grid-4" style="margin-top:2rem;">
+        <div class="price-card">
+          <div class="price-name">Gap Analysis</div>
+          <div class="price-amt">R8,750</div>
+          <div class="price-vat">Incl. VAT</div>
+          <p class="price-scope">Comprehensive assessment against all SACPCMP requirements</p>
+          <ul class="price-items"><li class="price-item">6-tab gap analysis workbook</li><li class="price-item">Qualification route mapping</li><li class="price-item">Terminology analysis</li><li class="price-item">Personalised action plan</li></ul>
+        </div>
+        <div class="price-card">
+          <div class="price-name">Documentation</div>
+          <div class="price-amt">R25,000</div>
+          <div class="price-vat">Incl. VAT</div>
+          <p class="price-scope">Gap analysis + complete documentation preparation</p>
+          <ul class="price-items"><li class="price-item">Everything in Gap Analysis</li><li class="price-item">SACPCMP-ready CV rewrite</li><li class="price-item">Annexure A1 profiles (2+)</li><li class="price-item">Annexure A2 reports (2)</li><li class="price-item">CPD record compilation</li></ul>
+        </div>
+        <div class="price-card featured">
+          <div class="price-badge">Most Popular</div>
+          <div class="price-name">Full Support</div>
+          <div class="price-amt">R38,500</div>
+          <div class="price-vat">Incl. VAT</div>
+          <p class="price-scope">End-to-end from gap analysis through interview prep</p>
+          <ul class="price-items"><li class="price-item">Everything in Documentation</li><li class="price-item">Application submission support</li><li class="price-item">SACPCMP monitoring & liaison</li><li class="price-item">Interview coaching</li><li class="price-item">Mock interview session</li><li class="price-item">Post-registration CPD plan</li></ul>
+        </div>
+        <div class="price-card">
+          <div class="price-name">Interview Prep</div>
+          <div class="price-amt">R12,500</div>
+          <div class="price-vat">Incl. VAT</div>
+          <p class="price-scope">For candidates who have already submitted</p>
+          <ul class="price-items"><li class="price-item">9 knowledge area coaching</li><li class="price-item">Legislation & contracts review</li><li class="price-item">Mock interview session</li><li class="price-item">200-question prep bank</li></ul>
+        </div>
+      </div>
+      <p style="text-align:center;color:var(--gold);font-weight:600;font-size:0.9rem;margin-top:2rem;">Corporate discounts: 10% (3–5 candidates) | 15% (6–10) | 20% (11–20) | 25% (21+)</p>
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 7: EMPLOYERS -->
+<!-- ============================================================ -->
+<div class="page" id="page-employers">
+  <section class="section section-charcoal" style="padding-top:5rem;">
+    <div class="container reveal">
+      <div class="sec-label">For Employers</div>
+      <h2 class="sec-title">Why Organisations Choose Us</h2>
+      <p class="sec-desc">Register your staff for regulatory compliance, tender qualification, and B-BBEE contribution. Dedicated programme coordination and quarterly progress reporting.</p>
+    </div>
+  </section>
+  <section class="section section-light">
+    <div class="container reveal">
+      <div class="card-grid grid-3">
+        <div class="ben-card"><div class="ben-icon">⚖️</div><h3>Regulatory Compliance</h3><p>Act 48 mandates registration. Avoid fines equal to double remuneration for non-compliant staff on your projects.</p></div>
+        <div class="ben-card"><div class="ben-icon">📊</div><h3>B-BBEE Contribution</h3><p>Registration contributes to Skills Development and Management Control scorecard elements.</p></div>
+        <div class="ben-card"><div class="ben-icon">📋</div><h3>Tender Qualification</h3><p>Registered professionals increasingly required for CIDB grades 7–9 and government projects.</p></div>
+        <div class="ben-card"><div class="ben-icon">👥</div><h3>Talent Retention</h3><p>Investing in registration demonstrates commitment to professional development and career growth.</p></div>
+        <div class="ben-card"><div class="ben-icon">💰</div><h3>Bulk Discounts</h3><p>10% for 3–5, 15% for 6–10, 20% for 11–20, 25% for 21+ candidates. Dedicated coordinator.</p></div>
+        <div class="ben-card"><div class="ben-icon">📈</div><h3>Progress Reporting</h3><p>Quarterly employer progress reports with structured milestones and transparent candidate tracking.</p></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 8: RESOURCES -->
+<!-- ============================================================ -->
+<div class="page" id="page-resources">
+  <section class="section section-charcoal" style="padding-top:5rem;">
+    <div class="container reveal">
+      <div class="sec-label">Resources</div>
+      <h2 class="sec-title">Knowledge Hub</h2>
+      <p class="sec-desc">Free resources to help you understand the SACPCMP registration process. For personalised support, register your interest for a free consultation.</p>
+    </div>
+  </section>
+  <section class="section section-light">
+    <div class="container reveal">
+      <div style="display:flex;flex-direction:column;gap:1.2rem;">
+        <div class="res-card"><div class="res-icon">📖</div><div><h3>Registration Route Recommendation Guide</h3><p>Comprehensive 16-chapter guidebook covering NQF framework, 5 registration routes, decision flowchart, contracts reference, SA legislation, self-assessment worksheets, 200+ interview questions, and glossary.</p><span class="res-tag">50+ Pages — Available to Programme Candidates</span></div></div>
+        <div class="res-card"><div class="res-icon">📝</div><div><h3>SACPCMP Template Pack</h3><p>8 branded Word document templates: CV (prescribed format), Annexure A1 Project Profile, Annexure A2 Successes Report, Annexure A2 Challenges Report, CPD Record, Interview Preparation Guide, Application Checklist, and Cover Letter.</p><span class="res-tag">8 Templates — Available to Programme Candidates</span></div></div>
+        <div class="res-card"><div class="res-icon">❓</div><div><h3>Interview Question Banks</h3><p>200 questions across two workbooks: 100 core/intermediate/advanced questions covering all 9 knowledge areas, plus 100 advanced scenario-based questions testing high-order thinking, ethical reasoning, and leadership.</p><span class="res-tag">200 Questions — Available to Programme Candidates</span></div></div>
+        <div class="res-card"><div class="res-icon">🔗</div><div><h3>SACPCMP Online Portal</h3><p>Create your profile and manage your application at the SACPCMP registration portal. All applications are submitted online.</p><span class="res-tag"><a href="https://mypcm.sacpcmp.org.za" target="_blank" style="color:var(--crimson);text-decoration:none;">mypcm.sacpcmp.org.za →</a></span></div></div>
+        <div class="res-card"><div class="res-icon">📄</div><div><h3>SACPCMP Rules for Registration</h3><p>The official rules governing registration requirements, qualification criteria, assessment processes, and post-registration obligations. Effective August 2025.</p><span class="res-tag"><a href="https://sacpcmp.org.za" target="_blank" style="color:var(--crimson);text-decoration:none;">sacpcmp.org.za →</a></span></div></div>
+        <div class="res-card"><div class="res-icon">📋</div><div><h3>SACPCMP Identification of Work</h3><p>Defines the scope of services for Construction Project Managers (IDOW-CPM) and Construction Managers (IDOW-CM). Essential reading for application preparation and interview.</p><span class="res-tag"><a href="https://sacpcmp.org.za" target="_blank" style="color:var(--crimson);text-decoration:none;">Available on sacpcmp.org.za →</a></span></div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 9: REGISTER INTEREST -->
+<!-- ============================================================ -->
+<div class="page" id="page-register">
+  <section class="form-section" style="padding-top:5rem; min-height:100vh;">
+    <div class="form-wrapper">
+      <div class="sec-label" style="text-align:center;">Get Started</div>
+      <h2 class="sec-title" style="text-align:center;color:var(--white);">Register Your Interest</h2>
+      <p class="sec-desc" style="text-align:center;margin:0 auto 3rem;">Complete the form below and we'll contact you within 48 hours for a free initial consultation to discuss your registration pathway.</p>
+
+      <form id="interestForm" class="form-grid">
+        <div class="form-group"><label>Full Name *</label><input type="text" name="name" placeholder="Your full name" required></div>
+        <div class="form-group"><label>Email Address *</label><input type="email" name="email" placeholder="your@email.com" required></div>
+        <div class="form-group"><label>Cell Number *</label><input type="tel" name="phone" placeholder="e.g. 082 123 4567" required></div>
+        <div class="form-group"><label>Current Employer</label><input type="text" name="employer" placeholder="Company name"></div>
+        <div class="form-group"><label>Current Position</label><input type="text" name="position" placeholder="e.g. Site Agent, Project Manager"></div>
+        <div class="form-group"><label>Years of Experience *</label><select name="experience" required><option value="" disabled selected>Select</option><option>0–3 years</option><option>4–6 years</option><option>7–10 years</option><option>10+ years</option></select></div>
+        <div class="form-group"><label>Highest Qualification *</label><select name="qualification" required><option value="" disabled selected>Select</option><option>Matric / NQF 4</option><option>National Diploma / NQF 6</option><option>B-Tech / NQF 7</option><option>Honours / PostGrad Dip / NQF 8</option><option>Masters / NQF 9</option><option>Doctorate / NQF 10</option><option>Other</option></select></div>
+        <div class="form-group"><label>Target Registration *</label><select name="target" required><option value="" disabled selected>Select</option><option>Pr. CPM (Construction Project Manager)</option><option>Pr. CM (Construction Manager)</option><option>Not sure — need guidance</option></select></div>
+        <div class="form-group"><label>SACPCMP Status</label><select name="status"><option value="" disabled selected>Select</option><option>Candidate (C.CPM / C.CM)</option><option>Started but not completed</option><option>Previously registered (lapsed)</option><option>Not registered</option></select></div>
+        <div class="form-group"><label>Preferred Package</label><select name="package"><option value="" disabled selected>Select</option><option>Gap Analysis (R8,750)</option><option>Documentation (R25,000)</option><option>Full Support (R38,500)</option><option>Interview Prep (R12,500)</option><option>Not sure — need guidance</option></select></div>
+        <div class="form-group full"><label>How Did You Hear About Us?</label><select name="source"><option value="" disabled selected>Select</option><option>LinkedIn</option><option>Google</option><option>Referral</option><option>Employer</option><option>Industry event</option><option>SACPCMP</option><option>Other</option></select></div>
+        <div class="form-group full"><label>Anything Else?</label><textarea name="message" placeholder="Tell us about your situation, challenges, or questions..."></textarea></div>
+        <div class="form-submit"><button type="submit">Submit — Get Your Free Consultation</button></div>
+      </form>
+      <p class="form-note">Your information is confidential. We'll contact you within 48 hours. No obligation.</p>
+      <div class="form-success" id="formSuccess"><h3>Thank You!</h3><p>We've received your registration of interest. A member of the Construction Management Foundation team will contact you within 48 hours to schedule your free initial consultation.<br><br>Email: <strong>info@cmfoundation.org.za</strong></p></div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== FOOTER (shown on all pages) ===== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand"><strong>Construction Management Foundation NPC</strong><br>Advancing Professional Registration Across Africa<br>Johannesburg, Gauteng, South Africa</div>
+    <div class="footer-right"><strong>Email:</strong> info@cmfoundation.org.za<br><strong>Banking:</strong> FNB Cheque Account 63135772530<br>© 2026 Construction Management Foundation. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+// Page navigation
+function showPage(pageId, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + pageId).classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.querySelector('.nav-links').classList.remove('open');
+  // Re-trigger reveals
+  setTimeout(() => {
+    document.querySelectorAll('.reveal').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight) el.classList.add('visible');
+    });
+  }, 100);
+}
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Form
+document.getElementById('interestForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  this.style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+  document.querySelector('.form-note').style.display = 'none';
+});
+</script>
+
+</body>
+</html>
